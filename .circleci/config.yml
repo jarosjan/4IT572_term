@@ -23,9 +23,9 @@ jobs:
       - run:
           command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
       - run:
-          command: docker build -t my_ansible .
+          command: sudo docker build -t my_ansible .
       - run:
-          command: docker run my_ansible
+          command: sudo docker run my_ansible
 
 workflows:
   version: 2.1
