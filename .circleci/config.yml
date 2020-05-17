@@ -32,7 +32,7 @@ jobs:
       - run:
           command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
       - run: |
-          ls -la
+          cd 4IT572_term_ansible
           docker build -t my_ansible .
           docker run my_ansible
 
