@@ -22,10 +22,11 @@ jobs:
           at: .
       - run:
           command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
-      - run:
-          command: sudo docker build -t my_ansible .
-      - run:
-          command: sudo docker run my_ansible
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          docker build -t my_ansible .
+          docker run my_ansible
 
 workflows:
   version: 2.1
