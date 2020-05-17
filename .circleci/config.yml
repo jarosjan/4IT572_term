@@ -18,7 +18,7 @@ jobs:
   deploy:
     <<: *term
     steps:
-#          https://stackoverflow.com/questions/58825046/docker-compose-deployment-configuration-for-circle-ci:
+#     https://stackoverflow.com/questions/58825046/docker-compose-deployment-configuration-for-circle-ci:
       - run:
           name: Install `docker-compose`
           command: |
@@ -32,6 +32,7 @@ jobs:
       - run:
           command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
       - run: |
+          ls -la
           docker build -t my_ansible .
           docker run my_ansible
 
