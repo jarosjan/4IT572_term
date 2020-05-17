@@ -30,10 +30,6 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - setup_remote_docker:
           docker_layer_caching: false
-      - run:
-          name: Build using `docker-compose`
-          command: |
-            docker-compose build
       - run: |
           docker build -t my_ansible .
           docker run my_ansible
