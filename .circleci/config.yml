@@ -29,9 +29,9 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: |
-          docker build -f "Dockerfile_ansible" -t my_ansible .
-          docker run my_ansible
+      - run:
+          command: docker --tlsverify -H=$DOCKER_HOST --tlscacert=$DOCKER_CERT_PATH/ca.pem --tlscert=$DOCKER_CERT_PATH/cert.pem --tlskey=$DOCKER_CERT_PATH/key.pem build -f "Dockerfile_ansible" -t my_ansible .
+
 
 workflows:
   version: 2.1
