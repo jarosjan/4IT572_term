@@ -32,7 +32,6 @@ jobs:
             docker build -t my_ansible .
             docker run my_ansible
 
-
 workflows:
   version: 2.1
   build:
