@@ -5,7 +5,9 @@ RUN apt-get update \
     && python3 --version \
     && pip3 install ansible boto boto3 \
     && ansible --version \
-    && apt-get install openssh-client -y
+    && apt-get install openssh-client -y \
+    && && mkdir ~/.ssh \
+    && echo "StrictHostKeyChecking no" > ~/.ssh/config
 
 COPY ./ansible /ansible
 COPY term.pem .
@@ -13,5 +15,4 @@ COPY term.pem .
 RUN chmod 400 ./term.pem
 
 CMD mkdir ~/.ssh
-CMD echo "StrictHostKeyChecking no" > ~/.ssh/config
 CMD ansible-playbook ./ansible/ec2_deploy.yml --user ubuntu --key-file ./term.pem -vvvv
