@@ -1,0 +1,14 @@
+FROM debian:10.4
+
+COPY ./ansible /ansible
+COPY term.pem .
+
+RUN apt-get update \
+    && apt-get install python3-pip -y \
+    && python3 --version \
+    && pip3 install ansible boto boto3 \
+    && ansible --version \
+    && apt-get install openssh-client -y \
+    && chmod 400 ./term.pem \
+    && export ANSIBLE_HOST_KEY_CHECKING=False \
+    && ansible-playbook ./ansible/ec2_deploy.yml --user ubuntu --key-file ./term.pem -vvvv
