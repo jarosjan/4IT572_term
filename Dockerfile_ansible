@@ -6,7 +6,7 @@ RUN apt-get update \
     && pip3 install ansible boto boto3 \
     && ansible --version \
     && apt-get install openssh-client -y \
-    && && mkdir ~/.ssh \
+    && mkdir ~/.ssh \
     && echo "StrictHostKeyChecking no" > ~/.ssh/config
 
 COPY ./ansible /ansible
