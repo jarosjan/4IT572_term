@@ -29,10 +29,8 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - setup_remote_docker:
           docker_layer_caching: false
-      - run: |
-          git clone https://github.com/jarosjan/4IT572_term_ansible.git
-          cd 4IT572_term_ansible
-          docker build -t my_ansible .
+      - run: 
+          command: docker build -f "Dockerfile_ansible" -t my_ansible .
 
 workflows:
   version: 2.1
