@@ -18,19 +18,23 @@ jobs:
   deploy:
     <<: *term
     steps:
-      steps:
-        - attach_workspace:
-            at: .
-        - setup_remote_docker:
-            docker_layer_caching: false
-#        - run:
-#            command: docker --tlsverify -H=$DOCKER_HOST --tlscacert=$DOCKER_CERT_PATH/ca.pem --tlscert=$DOCKER_CERT_PATH/cert.pem --tlskey=$DOCKER_CERT_PATH/key.pem build -f "Dockerfile_ubuntu" -t nehehe:latest .
-        - run:
-            command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
-        - run: |
-            cd 4IT572_term_ansible
-            docker build -t my_ansible .
-            docker run my_ansible
+      #     https://stackoverflow.com/questions/58825046/docker-compose-deployment-configuration-for-circle-ci:
+      - run:
+          name: Install `docker-compose`
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - attach_workspace:
+          at: .
+      - run:
+          command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
+      - run: |
+          cd 4IT572_term_ansible
+          docker build -t my_ansible .
+          docker run my_ansible
 
 workflows:
   version: 2.1
