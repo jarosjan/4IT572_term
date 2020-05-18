@@ -19,18 +19,18 @@ jobs:
     <<: *term
     steps:
       steps:
-      - attach_workspace:
-          at: .
-      - setup_remote_docker:
-          docker_layer_caching: false
-      - run:
-          command: docker --tlsverify -H=$DOCKER_HOST --tlscacert=$DOCKER_CERT_PATH/ca.pem --tlscert=$DOCKER_CERT_PATH/cert.pem --tlskey=$DOCKER_CERT_PATH/key.pem build -f "Dockerfile_ubuntu" -t nehehe:latest .
-      - run:
-          command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
-      - run: |
-          cd 4IT572_term_ansible
-          docker build -t my_ansible .
-          docker run my_ansible
+        - attach_workspace:
+            at: .
+        - setup_remote_docker:
+            docker_layer_caching: false
+        - run:
+            command: docker --tlsverify -H=$DOCKER_HOST --tlscacert=$DOCKER_CERT_PATH/ca.pem --tlscert=$DOCKER_CERT_PATH/cert.pem --tlskey=$DOCKER_CERT_PATH/key.pem build -f "Dockerfile_ubuntu" -t nehehe:latest .
+        - run:
+            command: git clone https://github.com/jarosjan/4IT572_term_ansible.git
+        - run: |
+            cd 4IT572_term_ansible
+            docker build -t my_ansible .
+            docker run my_ansible
 
 workflows:
   version: 2.1
